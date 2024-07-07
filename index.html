@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>CS 194-26 Project 4</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Kalam&family=Permanent+Marker&family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--Title Information-->
+	<div id="header">
+        <center>
+            <div id="title"><h1>CS 194-26: Image Manipulation and Computational Photography (Fall 2022)</h1></div>
+            <div class="title2"><h2>Project 4: <i>Image Warping and Mosaicing</i></h2></div>
+        </center>
+    </div>   
+
+    <!--Shoot the Pictures-->
+    <h2>Part A: Shoot the Pictures</h2>
+    <p>I shot and digitized these photos using my digital camera in manual mode at a fixed aperture, shutter speed, and iso. 
+        The first three images are for image rectification, and therefore I shot them with a side perspective.
+        The next three sets of images was shot with overlap for stitching together in an image mosaic. 
+    </p>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/side.JPG" width="500" alt=''/>
+            <figcaption class="fig3">Print Original Image</figcaption>
+        </div>
+        <div class="column2">
+            <img src="assets/images/trash.JPG" width="500" alt=''/>
+            <figcaption class="fig3">Trash Original Image</figcaption>
+        </div>
+        <div class="column2">
+            <img src="assets/images/street.JPG" width="500" alt=''/>
+            <figcaption class="fig3">Wall Original Image</figcaption>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/mosaic1.JPG" width="500" alt=''/>
+            <figcaption class="fig3">City Mosaic Original Image 1</figcaption>
+        </div>
+
+        <div class="column2">
+            <img src="assets/images/mosaic2.JPG" width="500" alt=''/>
+            <figcaption class="fig3">City Mosaic Original Image 2</figcaption>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/bridge0.JPG" width="500" alt=''/>
+            <figcaption class="fig3">Bridge Mosaic Original Image 1</figcaption>
+        </div>
+
+        <div class="column2">
+            <img src="assets/images/bridge1.JPG" width="500" alt=''/>
+            <figcaption class="fig3">Bridge Mosaic Original Image 2</figcaption>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/blue1.JPG" width="500" alt=''/>
+            <figcaption class="fig3">Blue City Mosaic Original Image 1</figcaption>
+        </div>
+
+        <div class="column2">
+            <img src="assets/images/blue2.JPG" width="500" alt=''/>
+            <figcaption class="fig3">Blue City Mosaic Original Image 2</figcaption>
+        </div>
+    </div>
+
+    <!-- Recover Homographies -->
+    <h2>Recover Homographies</h2>
+    <p> I was able to recover a 3x3 homography matrix by setting up a linear system of equations in the form A*H = b. 
+        Given an input of the two corresponsing sets of points, I could recover H by solving a system of equations using least squares.
+        I referenced the following <a href="https://towardsdatascience.com/estimating-a-homography-matrix-522c70ec4b2c">article</a> and images in the process.
+    </p>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/h1.png" width="600" alt=''/>
+        </div>
+
+        <div class="column2">
+            <img src="assets/images/h.png" width="600" alt=''/>
+        </div>
+    </div>
+
+
+    <!--Warp the Images-->
+    <h2>Warp and Rectify the Images</h2>
+    <p> I was able to use the calculated homography matrix (H) to warp the image. 
+        First, I calculated a bounding box to define the corners of the warped image.
+        Then, I was able to apply an inverse warp on the original image.
+        I tested this by rectifying a set of images with planar surfaces to become frontal-parallel. 
+        I selected four points from each photo in order to prepare for the next step. 
+        In addition, I defined a set of 4 corresponding points (rectangle shaped) by hand for the original image to be warped to.
+        The results are shown below:
+    </p>
+
+    <div class="row">
+        <div class="column4">
+            <img src="assets/images/plotted1.png" width="400" alt=''/>
+            <figcaption class="fig3">Print Original Image with Points</figcaption>
+        </div>
+
+        <div class="column4">
+            <img src="assets/images/fixed1.png" width="400" alt=''/>
+            <figcaption class="fig3">Print Rectified Image</figcaption>
+        </div>
+
+        <div class="column4">
+            <img src="assets/images/zoom fiz.png" width="400" alt=''/>
+            <figcaption class="fig3">Print Rectified Image Zoom</figcaption>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/trashpt.png" width="400" alt=''/>
+            <figcaption class="fig3">Trash Original Image with Points</figcaption>
+        </div>
+        <div class="column2">
+            <img src="assets/images/trash_fix.png" width="400" alt=''/>
+            <figcaption class="fig3">Trash Rectified Image</figcaption>
+        </div>
+        <div class="column2">
+            <img src="assets/images/trash_fix zoom.png" width="400" alt=''/>
+            <figcaption class="fig3">Trash Rectified Image Zoom</figcaption>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/streetpts.png" width="400" alt=''/>
+            <figcaption class="fig3">Wall Original Image with Points</figcaption>
+        </div>
+        <div class="column2">
+            <img src="assets/images/stret.png" width="400" alt=''/>
+            <figcaption class="fig3">Wall Rectified Image</figcaption>
+        </div>
+        <div class="column2">
+            <img src="assets/images/street wall.png" width="350" alt=''/>
+            <figcaption class="fig3">Wall Rectified Image Zoom</figcaption>
+        </div>
+    </div>
+
+    <!--Blend the images into a mosaic -->
+    <h2>Blend the images into a mosaic</h2>
+    <p>I blended images into a mosaic by selecting corresponding sets of points from each image in the sequence (using corners and landmarks).
+        I used one image (right) as the "base" and warped the second one to it's projection. 
+    </p>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/m1pts.png" width="500" alt=''/>
+            <figcaption class="fig3">City Mosaic 1 Points</figcaption>
+        </div>
+        <div class="column2">
+            <img src="assets/images/m2pts.png" width="500" alt=''/>
+            <figcaption class="fig3">City Mosaic 2 Points</figcaption>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column1">
+            <img src="assets/images/city_mosaic.jpg" width="800" alt=''/>
+            <figcaption class="fig3">City Mosaic Stitched</figcaption>
+        </div>  
+    </div>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/b1pt.png" width="500" alt=''/>
+            <figcaption class="fig3">Bridge Mosaic 1 Points</figcaption>
+        </div>
+        <div class="column2">
+            <img src="assets/images/b2pt.png" width="500" alt=''/>
+            <figcaption class="fig3">Bridge Mosaic 2 Points</figcaption>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column1">
+            <img src="assets/images/bridge_mosaic.jpg" width="800" alt=''/>
+            <figcaption class="fig3">Bridge Mosaic Stitched</figcaption>
+        </div>  
+    </div>
+
+    <div class="row">
+        <div class="column2">
+            <img src="assets/images/blue1pts.png" width="500" alt=''/>
+            <figcaption class="fig3">Blue City Mosaic 1 Points</figcaption>
+        </div>
+        <div class="column2">
+            <img src="assets/images/blue2pts.png" width="500" alt=''/>
+            <figcaption class="fig3">Blue City Mosaic 2 Points</figcaption>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column1">
+            <img src="assets/images/blue_mosaic.jpg" width="800" alt=''/>
+            <figcaption class="fig3">City Mosaic Stitched</figcaption>
+        </div>  
+    </div>
+    <center>
+        <h3>Mosaic Blending</h3>
+        <p>In order to stitch the two images together more seamlessly, I blendeded the two images together using a two level laplacian stack using the same method I implemented in Project 2.
+            I created a custom mask for each set of images splitting it in half near the center of overlap.
+        </p>
+        <div class="row">
+            <div class="column1">
+                <img src="assets/images/city_mosaic.jpg" width="800" alt=''/>
+                <figcaption class="fig3">City Laplacian Blended Mosaic</figcaption>
+                <img src="assets/images/lap.png" width="800" alt=''/>
+                <figcaption class="fig3">Bridge Laplacian Blended Mosaic</figcaption>
+                <img src="assets/images/merge blue.png" width="800" alt=''/>
+                <figcaption class="fig3">Blue City Laplacian Blended Mosaic</figcaption>
+            </div>  
+        </div>    
+    </center>
+   
+    <h2>Part A: What I've Learned</h2>
+    <p>In part A, the coolest thing that I learned was how to rectify images. 
+        I think it was really cool to see how the perspective of an image can completely change with warping. </p>
+
+    <h2>Part B: Feataure Matching for Autostitching</h2>
+
+    <h2>Detecting Corner Features</h2>
+    <p>In this portion, our goal is to implement feature matching to automatially stitch together mosaic images.
+        The first step was to use Harris Interest Point Detector on a single scale to detect corners on our images.
+    </p>
+    <p>Here are the results of the Harris corners (sigma = 3) overlaid on the images of the city from Part A.</p>
+    <div class="row">
+        <div class="column1">
+            <img src="assets/images/harris3.png" width="600" alt=''/>
+            <figcaption class="fig3">Harris Corners Image 1</figcaption> 
+        </div>  
+        <div class="column1">
+            <img src="assets/images/harris4.png" width="600" alt=''/>
+            <figcaption class="fig3">Harris Corners Image 2</figcaption>
+        </div>
+    </div>  
+
+    <h2>Adaptive Non-Maximal Suppression</h2>
+
+    <p>Using an ANMS strategy, we are able to reduce the number of points by selecting a fixed number of interest points based on corner strength.
+        Following the formula descriped in <a href="https://inst.eecs.berkeley.edu/~cs194-26/fa22/hw/proj4/Papers/MOPS.pdf">section 3</a>, I selected the 500 interest points with the largests valued supression radius.
+
+    </p>
+
+    <div class="row">
+        <div class="column1">
+            <img src="assets/images/anms1.png" width="600" alt=''/>
+            <figcaption class="fig3">500 Points Image 1</figcaption> 
+        </div>  
+        <div class="column1">
+            <img src="assets/images/anms.png" width="600" alt=''/>
+            <figcaption class="fig3">500 Points Image 2</figcaption>
+        </div>
+    </div>  
+
+    <h2>Extracting a Feature Descriptor for each feature point</h2>
+    <p>Next, we implement a feature descriptor for each feature point by selecting a 40x40 window around each point. 
+        Then, we subsample this to an 8x8 patch and normalize. 
+    </p>
+
+    <div class="row">
+        <div class="column1">
+            <img src="assets/images/patch1.png" width="700" alt=''/>
+            <figcaption class="fig3">Example 40x40 Pixel Patch</figcaption> 
+        </div>  
+        <div class="column1">
+            <img src="assets/images/norm.png" width="700" alt=''/>
+            <figcaption class="fig3">Normalized 8x8 Pixel Subsample</figcaption>
+        </div>
+    </div>  
+
+    <h2>Part B: What I've Learned</h2>
+    <p>I found the coolest part of this part of the project to be learning how to read and follow a research paper. </p>
+
+</body>
+</html>
